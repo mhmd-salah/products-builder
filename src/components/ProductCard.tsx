@@ -1,4 +1,5 @@
 import Image from "./Image";
+import Button, { Wid } from "./ui/Button";
 
 export default function ProductCard() {
   return (
@@ -21,9 +22,12 @@ export default function ProductCard() {
           url={"https://placehold.co/400"} alt="this image" className="w-10 h-10 rounded-full"
         />
       </div>
-      <div className="flex space-x-2 *:w-full *:mt-3 *:rounded-md *:p-1 text-white text-lg">
-        <button className="bg-sky-500">Edit</button>
-        <button className="bg-red-600">Delete</button>
+      <div className="flex space-x-2 mt-3">
+        <Button className="bg-sky-500" 
+          
+          onClick={()=>{alert("hello")}}
+        >Edit</Button>
+        <Button className="bg-red-600" width={Wid.full}>Delete</Button>
       </div>
     </div>
   );
