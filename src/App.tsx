@@ -1,7 +1,11 @@
 import "./App.css";
 import ProductCard from "./components/ProductCard";
+import { productList } from "./data";
 
 function App() {
+  const renderProductList = productList.map((product) => {
+    return <ProductCard key={product.id} product={product}/>;
+  });
   return (
     <div className="container">
       <div
@@ -14,10 +18,7 @@ function App() {
       gap-3
       "
       >
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {renderProductList}
       </div>
     </div>
   );
