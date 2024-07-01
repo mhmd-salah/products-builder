@@ -5,7 +5,8 @@ export const productList: IProduct[] = [
   {
     id: 1,
     title: "products one",
-    description: "this product one about this ",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. A, vero at. Ullam, recusandae cupiditate sapiente ducimus quisquam dolor itaque perferendis adipisci in ab soluta incidunt qui, quaerat accusamus iste quam.",
     price: 200,
     category: "cars",
     imgURL: "https://placehold.co/400",
@@ -14,7 +15,7 @@ export const productList: IProduct[] = [
   {
     id: 2,
     title: "products tow",
-    description: "this product three about this ",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. A, vero at. Ullam, recusandae cupiditate sapiente ducimus quisquam dolor itaque perferendis adipisci in ab soluta incidunt qui, quaerat accusamus iste quam.",
     price: 200,
     category: "cars",
     imgURL: "https://placehold.co/400",
@@ -23,7 +24,7 @@ export const productList: IProduct[] = [
   {
     id: 3,
     title: "products three",
-    description: "this product three about this ",
+    description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. A, vero at. Ullam, recusandae cupiditate sapiente ducimus quisquam dolor itaque perferendis adipisci in ab soluta incidunt qui, quaerat accusamus iste quam.",
     price: 200,
     category: "cars",
     imgURL: "https://placehold.co/400",

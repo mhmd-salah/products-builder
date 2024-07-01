@@ -1,21 +1,18 @@
 import { COLORS } from "../constants/colors";
 import { Wid } from "../enums";
 import { IpropsProductCard } from "../interfaces";
+import { textSlicer } from "../utils/functions";
 import Image from "./Image";
 import Button from "./Ui/Button";
 
 export default function ProductCard({ product:{title,description,imgURL ,price,category} }: IpropsProductCard) {
   return (
-    <div className="border rounded-md  flex flex-col">
+    <div className="border rounded-md  flex flex-col max-w-sm md:max-w-lg mx-auto bg-white shadow-lg pb-2">
       <Image url={"https://placehold.co/400"} className="rounded-md" />
       <div className="p-2">
         <h3 className="text-2xl font-bold my-2">{title}</h3>
-        <p>{description}</p>
+        <p>{textSlicer(description,100)}</p>
         <div className="flex space-x-1 my-3 *:rounded-full *:w-5 *:h-5 *:cursor-pointer">
-          {/* <span className="bg-indigo-600" />
-          <span className="bg-teal-600 " />
-          <span className="bg-orange-600" />
-          <span className="bg-sky-500" /> */}
           {COLORS.map((color) => (
             <span style={{ backgroundColor: color }}></span>
           ))}
