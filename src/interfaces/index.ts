@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 import { Wid } from "../enums";
 
 export interface IpropsProductCard{
@@ -25,4 +25,14 @@ export interface IPropsModle {
   close: () => void;
   title?: string;
   children:ReactNode
+}
+
+export interface IformatInputs{
+  id:string
+  name:string
+  label:string
+  type:string
+}
+export interface IpropsInputModal extends InputHTMLAttributes<HTMLInputElement> {
+  
 }

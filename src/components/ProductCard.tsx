@@ -31,7 +31,7 @@ export default function ProductCard({ product:{title,description,imgURL ,price,c
         <div className="flex space-x-2 mt-3">
           <Button className="bg-sky-500">Edit</Button>
           <Button className="bg-red-600" width={Wid.full}>
-            Delete Button
+            Delete
           </Button>
         </div>
       </div>
