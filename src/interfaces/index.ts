@@ -15,7 +15,10 @@ export interface IProduct {
   title: string;
   description: string;
   price: number;
-  category: string;
+  category: {
+    name:string,
+    imgURL:string
+  };
   imgURL?: string;
   colors: string[];
 }

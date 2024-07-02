@@ -33,7 +33,7 @@ export const productList: IProduct[] = [
   },
 ];
 
-export const formInputs :IformatInputs[] = [
+export const formInputs: IformatInputs[] = [
   {
     id: "title",
     name: "title",
@@ -48,7 +48,7 @@ export const formInputs :IformatInputs[] = [
   },
   {
     id: "image",
-    name: "imageURL",
+    name: "imgURL",
     label: "Product Image URL",
     type: "text",
   },
