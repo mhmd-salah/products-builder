@@ -32,7 +32,7 @@ export interface IPropsModle {
 
 export interface IformatInputs{
   id:string
-  name:string
+  name: "title"| "description"|"price"|"imgURL"
   label:string
   type:string
 }

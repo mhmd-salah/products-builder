@@ -22,11 +22,20 @@ function App() {
   });
 
   const renderProductList = productList.map((product) => {
-    return <ProductCard key={product.id} product={product} />;
+    return <ProductCard key={product.id} product={product}/>;
   });
 
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      setProduct({
+        ...product,
+        [name]: value,
+      });
+      console.log(product)
+    };
+
   const renderFormInputList = formInputs.map((input) => (
-    <div className="flex flex-col space-y-2">
+    <div className="flex flex-col space-y-2" key={input.id}>
       <label htmlFor={input.id} className="text-xl mb-1">
         {input.label}
       </label>
@@ -44,13 +53,7 @@ function App() {
 
   const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const [value, name] = e.target;
-    setProduct({
-      ...product,
-      [name]: value,
-    });
-  };
+
   return (
     <div className="container mt-10">
       <Button

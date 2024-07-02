@@ -14,13 +14,13 @@ export default function ProductCard({ product:{title,description,imgURL ,price,c
         <p>{textSlicer(description,100)}</p>
         <div className="flex space-x-1 my-3 *:rounded-full *:w-5 *:h-5 *:cursor-pointer">
           {COLORS.map((color) => (
-            <span style={{ backgroundColor: color }}></span>
+            <span style={{ backgroundColor: color }} key={color}></span>
           ))}
         </div>
         <div className="flex justify-between items-center">
           <span className="text-xl font-bold">${price}</span>
           <div className="flex items-center gap-3">
-            {category}
+            {category.name}
             <Image
               url={imgURL}
               alt={title}

@@ -7,7 +7,10 @@ export const productList: IProduct[] = [
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. A, vero at. Ullam, recusandae cupiditate sapiente ducimus quisquam dolor itaque perferendis adipisci in ab soluta incidunt qui, quaerat accusamus iste quam.",
     price: 200,
-    category: "cars",
+    category: {
+      name: "cars",
+      imgURL: "https://placehold.c0/200",
+    },
     imgURL: "https://placehold.co/400",
     colors: ["red", "green", "blue"],
   },
@@ -17,7 +20,10 @@ export const productList: IProduct[] = [
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. A, vero at. Ullam, recusandae cupiditate sapiente ducimus quisquam dolor itaque perferendis adipisci in ab soluta incidunt qui, quaerat accusamus iste quam.",
     price: 200,
-    category: "cars",
+    category: {
+      name: "cars",
+      imgURL: "https://placehold.c0/200",
+    },
     imgURL: "https://placehold.co/400",
     colors: ["red", "green", "blue"],
   },
@@ -27,7 +33,10 @@ export const productList: IProduct[] = [
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. A, vero at. Ullam, recusandae cupiditate sapiente ducimus quisquam dolor itaque perferendis adipisci in ab soluta incidunt qui, quaerat accusamus iste quam.",
     price: 200,
-    category: "cars",
+    category: {
+      name: "cars",
+      imgURL: "https://placehold.c0/200",
+    },
     imgURL: "https://placehold.co/400",
     colors: ["red", "green", "blue"],
   },
