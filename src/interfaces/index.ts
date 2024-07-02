@@ -5,7 +5,6 @@ export interface IpropsProductCard{
   product:IProduct;
 }
 
-
 export interface IpropsButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   className?: string;
@@ -19,4 +18,11 @@ export interface IProduct {
   category: string;
   imgURL?: string;
   colors: string[];
+}
+
+export interface IPropsModle {
+  isOpen: boolean;
+  close: () => void;
+  title?: string;
+  children:ReactNode
 }
