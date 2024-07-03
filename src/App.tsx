@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import "./App.css";
 import ProductCard from "./components/ProductCard";
 import Modle from "./components/Ui/Modle";
@@ -9,30 +9,42 @@ import Input from "./components/Ui/Input";
 import { IProduct } from "./interfaces";
 
 function App() {
-  const [product, setProduct] = useState<IProduct>({
+  const defaultProduct = {
     title: "",
     description: "",
     imgURL: "",
-    price :0,
-    colors:[],
-    category:{
-      name:"",
-      imgURL:""
-    }
-  });
+    price: 0,
+    colors: [],
+    category: {
+      name: "",
+      imgURL: "",
+    },
+  };
+  const [product, setProduct] = useState<IProduct>(defaultProduct);
 
   const renderProductList = productList.map((product) => {
-    return <ProductCard key={product.id} product={product}/>;
+    return <ProductCard key={product.id} product={product} />;
   });
+  // handlers
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setProduct({
+      ...product,
+      [name]: value,
+    });
+    console.log(product);
+  };
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = e.target;
-      setProduct({
-        ...product,
-        [name]: value,
-      });
-      console.log(product)
-    };
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(product)
+    // throw new Error("function not implemented");
+  };
+
+  const onCancal = () => {
+    setProduct(defaultProduct);
+    close()
+  };
 
   const renderFormInputList = formInputs.map((input) => (
     <div className="flex flex-col space-y-2" key={input.id}>
@@ -76,13 +88,22 @@ function App() {
         {renderProductList}
       </div>
       <Modle isOpen={isOpen} close={close} title="Add New Product">
-        <form className="space-y-3">{renderFormInputList}</form>
-        <div className="flex gap-2 mt-4 ">
-          <Button className="bg-sky-600">Submit</Button>
-          <Button className="bg-red-600" onClick={close}>
-            Cancle
-          </Button>
-        </div>
+        <form className="space-y-3" onSubmit={submitHandler}>
+          {renderFormInputList}
+          <div className="flex gap-2 mt-4 ">
+            <Button className="bg-sky-600" type="submit">
+              Submit
+            </Button>
+            <Button
+              className="bg-red-600"
+              onClick={() => {
+                onCancal();
+              }}
+            >
+              Cancle
+            </Button>
+          </div>
+        </form>
       </Modle>
     </div>
   );
