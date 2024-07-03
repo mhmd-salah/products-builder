@@ -7,6 +7,7 @@ import Button from "./components/Ui/Button";
 import { Wid } from "./enums";
 import Input from "./components/Ui/Input";
 import { IProduct } from "./interfaces";
+import { productValidation } from "./validation";
 
 function App() {
   const defaultProduct = {
@@ -32,18 +33,24 @@ function App() {
       ...product,
       [name]: value,
     });
-    console.log(product);
   };
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(product)
+    const errors = productValidation({
+      title: product.title,
+      description: product.description,
+      imgURL: product.imgURL,
+      price: String(product.price),
+    });
+    console.log(errors)
+
     // throw new Error("function not implemented");
   };
 
   const onCancal = () => {
     setProduct(defaultProduct);
-    close()
+    close();
   };
 
   const renderFormInputList = formInputs.map((input) => (

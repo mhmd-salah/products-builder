@@ -16,10 +16,10 @@ export interface IProduct {
   description: string;
   price: number;
   category: {
-    name:string,
-    imgURL:string
+    name: string;
+    imgURL: string;
   };
-  imgURL?: string;
+  imgURL: string;
   colors: string[];
 }
 
@@ -30,11 +30,11 @@ export interface IPropsModle {
   children:ReactNode
 }
 
-export interface IformatInputs{
-  id:string
-  name: "title"| "description"|"price"|"imgURL"
-  label:string
-  type:string
+export interface IformatInputs {
+  id: string;
+  name: "title" | "description" | "price" | "imgURL";
+  label: string;
+  type: string;
 }
 export interface IpropsInputModal extends InputHTMLAttributes<HTMLInputElement> {
   
