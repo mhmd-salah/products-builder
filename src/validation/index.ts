@@ -28,7 +28,6 @@ export const productValidation = (product: {
 
   if(!product.price.trim()||isNaN(+product.price)){
     errors.price = "valid price is required"
-    
   }
   return errors;
 };
