@@ -37,7 +37,7 @@ function App() {
     return <ProductCard key={product.id} product={product} />;
   });
 
-  const renderProductColors=colors.map((color)=><CircleColor key={color}/>)
+  const renderProductColors=colors.map((color)=><CircleColor color={color} key={color}/>)
 
   // handlers
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -103,7 +103,6 @@ function App() {
   //*--------------------------------->>> Return component
   return (
     <div className="container mt-10">
-
       {/* this add product button */}
       <Button
         className="bg-blue-600 p-2 text-xl"
@@ -131,6 +130,7 @@ function App() {
       <Modle isOpen={isOpen} close={close} title="Add New Product">
         <form className="space-y-3" onSubmit={submitHandler}>
           {renderFormInputList}
+          <div className="flex space-x-1">{renderProductColors}</div>
           <div className="flex gap-2 mt-4 ">
             <Button className="bg-sky-600" type="submit">
               Submit
