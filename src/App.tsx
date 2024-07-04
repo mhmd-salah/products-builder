@@ -2,13 +2,14 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import "./App.css";
 import ProductCard from "./components/ProductCard";
 import Modle from "./components/Ui/Modle";
-import { formInputs, productList } from "./data";
+import { colors, formInputs, productList } from "./data";
 import Button from "./components/Ui/Button";
 import { Wid } from "./enums";
 import Input from "./components/Ui/Input";
 import { IProduct } from "./interfaces";
 import { productValidation } from "./validation";
 import ErrorMessage from "./components/ErrorMessage";
+import CircleColor from "./components/CircleColor";
 
 function App() {
   const defaultProduct = {
@@ -35,6 +36,8 @@ function App() {
   const renderProductList = productList.map((product) => {
     return <ProductCard key={product.id} product={product} />;
   });
+
+  const renderProductColors=colors.map((color)=><CircleColor key={color}/>)
 
   // handlers
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {

@@ -42,3 +42,6 @@ export interface IpropsErrorMessage{
   msg:string
 }
 
+export interface IpropsCircleColor{
+  // color:string
+}
