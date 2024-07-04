@@ -6,7 +6,7 @@ export const productList: IProduct[] = [
     title: "products one",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. A, vero at. Ullam, recusandae cupiditate sapiente ducimus quisquam dolor itaque perferendis adipisci in ab soluta incidunt qui, quaerat accusamus iste quam.",
-    price: 200,
+    price: "200",
     category: {
       name: "cars",
       imgURL: "https://placehold.c0/200",
@@ -19,7 +19,7 @@ export const productList: IProduct[] = [
     title: "products tow",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. A, vero at. Ullam, recusandae cupiditate sapiente ducimus quisquam dolor itaque perferendis adipisci in ab soluta incidunt qui, quaerat accusamus iste quam.",
-    price: 200,
+    price: "200",
     category: {
       name: "cars",
       imgURL: "https://placehold.c0/200",
@@ -32,7 +32,7 @@ export const productList: IProduct[] = [
     title: "products three",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. A, vero at. Ullam, recusandae cupiditate sapiente ducimus quisquam dolor itaque perferendis adipisci in ab soluta incidunt qui, quaerat accusamus iste quam.",
-    price: 200,
+    price: "200",
     category: {
       name: "cars",
       imgURL: "https://placehold.c0/200",

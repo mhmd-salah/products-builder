@@ -36,6 +36,9 @@ export interface IformatInputs {
   label: string;
   type: string;
 }
-export interface IpropsInputModal extends InputHTMLAttributes<HTMLInputElement> {
-  
+export interface IpropsInputModal extends InputHTMLAttributes<HTMLInputElement> {}
+
+export interface IpropsErrorMessage{
+  msg:string
 }
+

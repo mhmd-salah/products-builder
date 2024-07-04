@@ -8,6 +8,7 @@ import { Wid } from "./enums";
 import Input from "./components/Ui/Input";
 import { IProduct } from "./interfaces";
 import { productValidation } from "./validation";
+import ErrorMessage from "./components/ErrorMessage";
 
 function App() {
   const defaultProduct = {
@@ -21,11 +22,20 @@ function App() {
       imgURL: "",
     },
   };
+  // States hook
+  const [isOpen, setIsOpen] = useState(false);
   const [product, setProduct] = useState<IProduct>(defaultProduct);
+  const [errors, setErrors] = useState({
+    title: "",
+    description: "",
+    imgURL: "",
+    price: "",
+  });
 
   const renderProductList = productList.map((product) => {
     return <ProductCard key={product.id} product={product} />;
   });
+
   // handlers
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -33,24 +43,31 @@ function App() {
       ...product,
       [name]: value,
     });
+    setErrors({
+      ...errors,
+      [name]:""
+
+    })
   };
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const {title,description,imgURL} =product
+    const { title, description, imgURL } = product;
     const errors = productValidation({
-      title,
-      description,
-      imgURL,
+      title: title,
+      description: description,
+      imgURL: imgURL,
       price: String(product.price),
     });
-    console.log(errors)
 
-    const hasErrorMsg = Object.values(errors).some(value=>value=="") && Object.values(errors).every(value=> value === "")
-    if(!hasErrorMsg){
-      return
+    const hasErrorMsg =
+      Object.values(errors).some((value) => value == "") &&
+      Object.values(errors).every((value) => value === "");
+    if (!hasErrorMsg) {
+      setErrors(errors);
+      return;
     }
-    console.log("sending to server")
+    console.log("sending to server");
 
     // throw new Error("function not implemented");
   };
@@ -72,16 +89,19 @@ function App() {
         value={product[input.name]}
         onChange={onChangeHandler}
       />
+      <ErrorMessage msg={errors[input.name]} />
     </div>
   ));
 
-  const [isOpen, setIsOpen] = useState(false);
-
+  //->> controler dailog for open and close
   const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);
 
+  //*--------------------------------->>> Return component
   return (
     <div className="container mt-10">
+
+      {/* this add product button */}
       <Button
         className="bg-blue-600 p-2 text-xl"
         width={Wid.fit}
@@ -89,6 +109,8 @@ function App() {
       >
         Add Product
       </Button>
+
+      {/* this proudcts on site */}
       <div
         className="
       grid grid-cols-1 
@@ -101,6 +123,8 @@ function App() {
       >
         {renderProductList}
       </div>
+
+      {/* this dailog from headless */}
       <Modle isOpen={isOpen} close={close} title="Add New Product">
         <form className="space-y-3" onSubmit={submitHandler}>
           {renderFormInputList}
