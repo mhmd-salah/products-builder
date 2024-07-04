@@ -14,7 +14,7 @@ export interface IProduct {
   id?: number;
   title: string;
   description: string;
-  price: number;
+  price: string;
   category: {
     name: string;
     imgURL: string;

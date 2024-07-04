@@ -14,7 +14,7 @@ function App() {
     title: "",
     description: "",
     imgURL: "",
-    price: 0,
+    price: "",
     colors: [],
     category: {
       name: "",
@@ -37,13 +37,20 @@ function App() {
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const {title,description,imgURL} =product
     const errors = productValidation({
-      title: product.title,
-      description: product.description,
-      imgURL: product.imgURL,
+      title,
+      description,
+      imgURL,
       price: String(product.price),
     });
     console.log(errors)
+
+    const hasErrorMsg = Object.values(errors).some(value=>value=="") && Object.values(errors).every(value=> value === "")
+    if(!hasErrorMsg){
+      return
+    }
+    console.log("sending to server")
 
     // throw new Error("function not implemented");
   };
