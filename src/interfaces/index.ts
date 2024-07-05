@@ -45,3 +45,8 @@ export interface IpropsErrorMessage{
 export interface IpropsCircleColor extends HTMLAttributes<HTMLSpanElement>{
   color:string
 }
+export interface Icategory{
+  id:number
+  name:string
+  imgURL:string
+}

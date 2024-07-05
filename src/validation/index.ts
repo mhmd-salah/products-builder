@@ -1,3 +1,5 @@
+import { Icategory } from "../interfaces";
+
 export const productValidation = (product: {
   title: string;
   description: string;
@@ -38,4 +40,7 @@ export const productValidation = (product: {
   return errors;
 };
 
-
+export interface IpropsSelecte{
+  selected:Icategory
+  setSelected:(categorey:Icategory)=>void
+}

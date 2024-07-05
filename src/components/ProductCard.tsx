@@ -5,7 +5,7 @@ import CircleColor from "./CircleColor";
 import Image from "./Image";
 import Button from "./Ui/Button";
 
-export default function ProductCard({ product:{title,description,imgURL ,price,category,colors} }: IpropsProductCard) {
+export default function ProductCard({ product:{title,description ,price,category,colors} }: IpropsProductCard) {
   
   // ------------------
     const renderProductColors = colors.map((color) => (
@@ -30,13 +30,13 @@ export default function ProductCard({ product:{title,description,imgURL ,price,c
           <div className="flex items-center gap-3">
             {category.name}
             <Image
-              url={imgURL}
+              url={category.imgURL}
               alt={title}
               className="w-10 h-10 rounded-full"
             />
           </div>
         </div>
-        <div className="flex space-x-2 mt-3">
+        <div className="flex space-x-2 mt-3 items-end">
           <Button className="bg-sky-500">Edit</Button>
           <Button className="bg-red-600" width={Wid.full}>
             Delete

@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import "./App.css";
 import ProductCard from "./components/ProductCard";
 import Modle from "./components/Ui/Modle";
-import { colors, formInputs, productList } from "./data";
+import { categorys, colors, formInputs, productList } from "./data";
 import Button from "./components/Ui/Button";
 import { Wid } from "./enums";
 import Input from "./components/Ui/Input";
@@ -11,7 +11,7 @@ import { productValidation } from "./validation";
 import ErrorMessage from "./components/ErrorMessage";
 import CircleColor from "./components/CircleColor";
 // import { Select } from "@headlessui/react";
-import SelectMenu from "./components/Ui/SeclectMenu"
+import SelectMenu from "./components/Ui/SeclectMenu";
 
 function App() {
   const defaultProduct = {
@@ -30,6 +30,7 @@ function App() {
   const [product, setProduct] = useState<IProduct>(defaultProduct);
   const [tempColors, setTempColors] = useState<string[]>([]);
   const [products, setProducts] = useState<IProduct[]>(productList);
+  const [selectedCatogry, setSelectedCategory] = useState(categorys[0]);
   const [errors, setErrors] = useState({
     title: "",
     description: "",
@@ -87,7 +88,7 @@ function App() {
     }
     console.log("sending to server");
     setProducts((prev) => [
-      { ...product, id: Date.now(), colors: tempColors },
+      { ...product, id: Date.now(), colors: tempColors,category:selectedCatogry },
       ...prev,
     ]);
     setProduct(defaultProduct);
@@ -150,7 +151,6 @@ function App() {
       {/* this dailog from headless */}
       <Modle isOpen={isOpen} close={close} title="Add New Product">
         <form className="space-y-3" onSubmit={submitHandler}>
-
           {renderFormInputList}
 
           <div className="flex flex-wrap  gap-1">
@@ -166,7 +166,13 @@ function App() {
           </div>
 
           <div className="flex space-x-1">{renderProductColors}</div>
-          <SelectMenu />
+
+          {/* select menu */}
+          <SelectMenu
+            selected={selectedCatogry}
+            setSelected={setSelectedCategory}
+          />
+
           <div className="flex gap-2 mt-4 ">
             <Button className="bg-sky-600" type="submit">
               Submit

@@ -1,4 +1,4 @@
-import { IProduct, IformatInputs } from "../interfaces";
+import { IProduct, Icategory, IformatInputs } from "../interfaces";
 
 export const productList: IProduct[] = [
   {
@@ -69,7 +69,7 @@ export const formInputs: IformatInputs[] = [
   },
 ];
 
-export const colors:string[] = [
+export const colors: string[] = [
   "#a855f7",
   "#2563eb",
   "#84D2C5",
@@ -84,4 +84,35 @@ export const colors:string[] = [
   "#1F8A70",
   "#820000",
   "#FF0032",
+];
+
+export const categorys: Icategory[] = [
+  {
+    id: 1,
+    name: "Electronics",
+    imgURL:
+      "https://images.pexels.com/photos/1054386/pexels-photo-1054386.jpeg",
+  },
+  {
+    id: 2,
+    name: "Fashion",
+    imgURL:
+      "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg",
+  },
+  {
+    id: 3,
+    name: "Home Appliances",
+    imgURL: "https://images.pexels.com/photos/276528/pexels-photo-276528.jpeg",
+  },
+  {
+    id: 4,
+    name: "Books",
+    imgURL:
+      "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg",
+  },
+  {
+    id: 5,
+    name: "Beauty & Personal Care",
+    imgURL: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
+  },
 ];
