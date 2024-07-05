@@ -10,6 +10,8 @@ import { IProduct } from "./interfaces";
 import { productValidation } from "./validation";
 import ErrorMessage from "./components/ErrorMessage";
 import CircleColor from "./components/CircleColor";
+// import { Select } from "@headlessui/react";
+import SelectMenu from "./components/Ui/SeclectMenu"
 
 function App() {
   const defaultProduct = {
@@ -27,7 +29,7 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [product, setProduct] = useState<IProduct>(defaultProduct);
   const [tempColors, setTempColors] = useState<string[]>([]);
-  const [products,setProducts] = useState<IProduct[]>(productList)
+  const [products, setProducts] = useState<IProduct[]>(productList);
   const [errors, setErrors] = useState({
     title: "",
     description: "",
@@ -44,11 +46,11 @@ function App() {
       color={color}
       key={color}
       onClick={() => {
-        if(tempColors.includes(color)){
-          setTempColors(prev=>prev.filter(item=>item!==color))
+        if (tempColors.includes(color)) {
+          setTempColors((prev) => prev.filter((item) => item !== color));
           return;
         }
-        setTempColors(prev=>[...prev,color])
+        setTempColors((prev) => [...prev, color]);
       }}
     />
   ));
@@ -84,10 +86,13 @@ function App() {
       return;
     }
     console.log("sending to server");
-    setProducts((prev) => [{ ...product ,id:Date.now(),colors:tempColors},...prev]);
-    setProduct(defaultProduct)
-    setTempColors([])
-    close()
+    setProducts((prev) => [
+      { ...product, id: Date.now(), colors: tempColors },
+      ...prev,
+    ]);
+    setProduct(defaultProduct);
+    setTempColors([]);
+    close();
     // throw new Error("function not implemented");
   };
 
@@ -145,11 +150,23 @@ function App() {
       {/* this dailog from headless */}
       <Modle isOpen={isOpen} close={close} title="Add New Product">
         <form className="space-y-3" onSubmit={submitHandler}>
+
           {renderFormInputList}
+
           <div className="flex flex-wrap  gap-1">
-            {tempColors.map(color=> <span key={color} className="rounded-md text-sm p-1 text-white" style={{background:color}}>{color}</span>)}
+            {tempColors.map((color) => (
+              <span
+                key={color}
+                className="rounded-md text-sm p-1 text-white"
+                style={{ background: color }}
+              >
+                {color}
+              </span>
+            ))}
           </div>
+
           <div className="flex space-x-1">{renderProductColors}</div>
+          <SelectMenu />
           <div className="flex gap-2 mt-4 ">
             <Button className="bg-sky-600" type="submit">
               Submit
