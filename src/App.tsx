@@ -39,7 +39,7 @@ function App() {
     return <ProductCard key={product.id} product={product} />;
   });
 
-  const renderProductColors=colors.map((color)=><CircleColor color={color} key={color} onClick={()=>setTempColors([...tempColors,color])}/>)
+  const renderProductColors=colors.map((color)=><CircleColor color={color} key={color} onClick={()=>setTempColors((prev)=>[...prev,color])}/>)
 
   // handlers
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
