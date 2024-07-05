@@ -26,8 +26,8 @@ function App() {
   // States hook
   const [isOpen, setIsOpen] = useState(false);
   const [product, setProduct] = useState<IProduct>(defaultProduct);
-  const [tempColors,setTempColors] = useState<string[]>([])
-  console.log(tempColors)
+  const [tempColors, setTempColors] = useState<string[]>([]);
+  console.log(tempColors);
   const [errors, setErrors] = useState({
     title: "",
     description: "",
@@ -39,7 +39,19 @@ function App() {
     return <ProductCard key={product.id} product={product} />;
   });
 
-  const renderProductColors=colors.map((color)=><CircleColor color={color} key={color} onClick={()=>setTempColors((prev)=>[...prev,color])}/>)
+  const renderProductColors = colors.map((color) => (
+    <CircleColor
+      color={color}
+      key={color}
+      onClick={() => {
+        if(tempColors.includes(color)){
+          setTempColors(prev=>prev.filter(item=>item!==color))
+          return;
+        }
+        setTempColors(prev=>[...prev,color])
+      }}
+    />
+  ));
 
   // handlers
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -50,9 +62,8 @@ function App() {
     });
     setErrors({
       ...errors,
-      [name]:""
-
-    })
+      [name]: "",
+    });
   };
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
@@ -132,6 +143,9 @@ function App() {
       <Modle isOpen={isOpen} close={close} title="Add New Product">
         <form className="space-y-3" onSubmit={submitHandler}>
           {renderFormInputList}
+          <div className="flex flex-wrap  gap-1">
+            {tempColors.map(color=> <span key={color} className="rounded-md text-sm p-1 text-white" style={{background:color}}>{color}</span>)}
+          </div>
           <div className="flex space-x-1">{renderProductColors}</div>
           <div className="flex gap-2 mt-4 ">
             <Button className="bg-sky-600" type="submit">
