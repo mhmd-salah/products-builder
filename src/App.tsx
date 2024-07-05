@@ -26,6 +26,8 @@ function App() {
   // States hook
   const [isOpen, setIsOpen] = useState(false);
   const [product, setProduct] = useState<IProduct>(defaultProduct);
+  const [tempColors,setTempColors] = useState<string[]>([])
+  console.log(tempColors)
   const [errors, setErrors] = useState({
     title: "",
     description: "",
@@ -37,7 +39,7 @@ function App() {
     return <ProductCard key={product.id} product={product} />;
   });
 
-  const renderProductColors=colors.map((color)=><CircleColor color={color} key={color}/>)
+  const renderProductColors=colors.map((color)=><CircleColor color={color} key={color} onClick={()=>setTempColors([...tempColors,color])}/>)
 
   // handlers
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {

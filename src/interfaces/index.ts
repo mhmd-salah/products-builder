@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
+import { ButtonHTMLAttributes, HTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 import { Wid } from "../enums";
 
 export interface IpropsProductCard{
@@ -42,6 +42,6 @@ export interface IpropsErrorMessage{
   msg:string
 }
 
-export interface IpropsCircleColor{
+export interface IpropsCircleColor extends HTMLAttributes<HTMLSpanElement>{
   color:string
 }
