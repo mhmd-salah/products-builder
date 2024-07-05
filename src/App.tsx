@@ -27,7 +27,7 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [product, setProduct] = useState<IProduct>(defaultProduct);
   const [tempColors, setTempColors] = useState<string[]>([]);
-  console.log(tempColors);
+  const [products,setProducts] = useState<IProduct[]>(productList)
   const [errors, setErrors] = useState({
     title: "",
     description: "",
@@ -35,7 +35,7 @@ function App() {
     price: "",
   });
 
-  const renderProductList = productList.map((product) => {
+  const renderProductList = products.map((product) => {
     return <ProductCard key={product.id} product={product} />;
   });
 
@@ -84,7 +84,10 @@ function App() {
       return;
     }
     console.log("sending to server");
-
+    setProducts((prev) => [{ ...product ,id:Date.now(),colors:tempColors},...prev]);
+    setProduct(defaultProduct)
+    setTempColors([])
+    close()
     // throw new Error("function not implemented");
   };
 
