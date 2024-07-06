@@ -9,8 +9,9 @@ export default function ProductCard({
   product,
   setProductToEdit,
   openEditM,
+  setProductToEditIdx,
+  idx,
 }: IpropsProductCard) {
-  
   const { title, description, price, category, colors } = product;
   // ------------------
   const renderProductColors = colors.map((color) => (
@@ -20,7 +21,8 @@ export default function ProductCard({
   //-----> handler
   function onEdit() {
     setProductToEdit(product);
-    openEditM()
+    openEditM();
+    setProductToEditIdx(idx);
   }
 
   return (

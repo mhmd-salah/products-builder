@@ -31,6 +31,7 @@ function App() {
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [product, setProduct] = useState<IProduct>(defaultProduct);
   const [productToEdit, setProductToEdit] = useState<IProduct>(defaultProduct);
+  const [productToEditIdx, setProductToEditIdx] = useState<number>(0);
   const [tempColors, setTempColors] = useState<string[]>([]);
   const [products, setProducts] = useState<IProduct[]>(productList);
   const [selectedCatogry, setSelectedCategory] = useState(categorys[0]);
@@ -40,20 +41,23 @@ function App() {
     imgURL: "",
     price: "",
   });
+  console.log(productToEditIdx)
   //->> controler dailog for open and close
   const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);
   const openEditM = () => setIsOpenEdit(true);
   const closeEditM = () => setIsOpenEdit(false);
   // renders
-  const renderProductList = products.map((product) => {
+  const renderProductList = products.map((product,idx) => {
     return (
-      <ProductCard
-        key={product.id}
-        product={product}
-        setProductToEdit={setProductToEdit}
-        openEditM={openEditM}
-      />
+        <ProductCard
+          key={product.id}
+          product={product}
+          setProductToEdit={setProductToEdit}
+          openEditM={openEditM}
+          setProductToEditIdx={setProductToEditIdx}
+          idx={idx}
+        />
     );
   });
   const renderProductColors = colors.map((color) => (
@@ -148,12 +152,12 @@ function App() {
   // edit |submit edit handler
   const submitEditHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { title, description, imgURL } = product;
+    const { title, description, imgURL } = productToEdit;
     const errors = productValidation({
       title: title,
       description: description,
       imgURL: imgURL,
-      price: String(product.price),
+      price: String(productToEdit.price),
     });
 
     const hasErrorMsg =
@@ -163,10 +167,15 @@ function App() {
       setErrors(errors);
       return;
     }
+
+    const updatedProducts = [...products]
+    updatedProducts[productToEditIdx] = productToEdit
+    setProducts(updatedProducts)
+
     console.log("sending to server");
-    setProduct(defaultProduct);
+    setProductToEdit(defaultProduct);
     setTempColors([]);
-    close();
+    closeEditM()
     // throw new Error("function not implemented");
   };
 
@@ -299,7 +308,7 @@ function App() {
 
           <div className="flex gap-2 mt-4 ">
             <Button className="bg-sky-600" type="submit">
-              Submit
+              Update
             </Button>
             <Button
               className="bg-red-600"

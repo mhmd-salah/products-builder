@@ -5,7 +5,9 @@ import { ProductName } from "../types";
 export interface IpropsProductCard {
   product: IProduct;
   setProductToEdit: (product: IProduct) => void;
-  openEditM:()=>void;
+  openEditM: () => void;
+  idx:number
+  setProductToEditIdx:(value:number)=>void
 }
 
 export interface IpropsButton extends ButtonHTMLAttributes<HTMLButtonElement> {
