@@ -81,8 +81,53 @@ function App() {
       [name]: "",
     });
   };
+  const onChangeEditHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setProductToEdit({
+      ...productToEdit,
+      [name]: value,
+    });
+    setErrors({
+      ...errors,
+      [name]: "",
+    });
+  };
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const { title, description, imgURL } = product;
+    const errors = productValidation({
+      title: title,
+      description: description,
+      imgURL: imgURL,
+      price: String(product.price),
+    });
+
+    const hasErrorMsg =
+      Object.values(errors).some((value) => value == "") &&
+      Object.values(errors).every((value) => value === "");
+    if (!hasErrorMsg) {
+      setErrors(errors);
+      return;
+    }
+    console.log("sending to server");
+    setProducts((prev) => [
+      {
+        ...product,
+        id: Date.now(),
+        colors: tempColors,
+        category: selectedCatogry,
+      },
+      ...prev,
+    ]);
+    setProduct(defaultProduct);
+    setTempColors([]);
+    close();
+    // throw new Error("function not implemented");
+  };
+  
+  // edit |submit edit handler
+  const submitEditHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { title, description, imgURL } = product;
     const errors = productValidation({
@@ -205,10 +250,35 @@ function App() {
 
       {/* edit modal  */}
       <Modle isOpen={isOpenEdit} close={closeEditM} title="Edit Product">
-        <form className="space-y-3" onSubmit={submitHandler}>
-          {renderFormInputList}
+        <form className="space-y-3" onSubmit={submitEditHandler}>
+          <div className="flex flex-col space-y-2">
+            <label htmlFor={"title"} className="text-xl mb-1">
+              {/* {input.label} */} product title
+            </label>
+            <Input
+              name={"title"}
+              type={"text"}
+              id={"title"}
+              value={productToEdit["title"]}
+              onChange={onChangeEditHandler}
+            />
+            <ErrorMessage msg={""} />
+          </div>
 
-          <div className="flex flex-wrap  gap-1">
+          <div className="flex flex-col space-y-2">
+            <label htmlFor={"title"} className="text-xl mb-1">
+              {/* {input.label} */} product description
+            </label>
+            <Input
+              name={"description"}
+              type={"text"}
+              id={"description"}
+              value={productToEdit["description"]}
+              onChange={onChangeEditHandler}
+            />
+            <ErrorMessage msg={""} />
+          </div>
+          {/* <div className="flex flex-wrap  gap-1">
             {tempColors.map((color) => (
               <span
                 key={color}
@@ -218,15 +288,15 @@ function App() {
                 {color}
               </span>
             ))}
-          </div>
+          </div> */}
 
-          <div className="flex space-x-1">{renderProductColors}</div>
+          {/* <div className="flex space-x-1">{renderProductColors}</div> */}
 
           {/* select menu */}
-          <SelectMenu
+          {/* <SelectMenu
             selected={selectedCatogry}
             setSelected={setSelectedCategory}
-          />
+          /> */}
 
           <div className="flex gap-2 mt-4 ">
             <Button className="bg-sky-600" type="submit">
