@@ -12,6 +12,7 @@ import ErrorMessage from "./components/ErrorMessage";
 import CircleColor from "./components/CircleColor";
 // import { Select } from "@headlessui/react";
 import SelectMenu from "./components/Ui/SeclectMenu";
+import { ProductName } from "./types";
 
 function App() {
   const defaultProduct = {
@@ -68,6 +69,23 @@ function App() {
       }}
     />
   ));
+  const renderProductEditWithErrorMsg = (id:string,label:string,name:ProductName) => {
+    return (
+      <div className="flex flex-col space-y-2">
+        <label htmlFor={id} className="text-xl mb-1">
+          {label} 
+        </label>
+        <Input
+          name={name}
+          type={"text"}
+          id={id}
+          value={productToEdit[name]}
+          onChange={onChangeEditHandler}
+        />
+        <ErrorMessage msg={errors[name]} />
+      </div>
+    );
+  };
 
   // handlers
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -81,6 +99,7 @@ function App() {
       [name]: "",
     });
   };
+
   const onChangeEditHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setProductToEdit({
@@ -125,7 +144,7 @@ function App() {
     close();
     // throw new Error("function not implemented");
   };
-  
+
   // edit |submit edit handler
   const submitEditHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -145,15 +164,6 @@ function App() {
       return;
     }
     console.log("sending to server");
-    setProducts((prev) => [
-      {
-        ...product,
-        id: Date.now(),
-        colors: tempColors,
-        category: selectedCatogry,
-      },
-      ...prev,
-    ]);
     setProduct(defaultProduct);
     setTempColors([]);
     close();
@@ -251,33 +261,22 @@ function App() {
       {/* edit modal  */}
       <Modle isOpen={isOpenEdit} close={closeEditM} title="Edit Product">
         <form className="space-y-3" onSubmit={submitEditHandler}>
-          <div className="flex flex-col space-y-2">
-            <label htmlFor={"title"} className="text-xl mb-1">
-              {/* {input.label} */} product title
-            </label>
-            <Input
-              name={"title"}
-              type={"text"}
-              id={"title"}
-              value={productToEdit["title"]}
-              onChange={onChangeEditHandler}
-            />
-            <ErrorMessage msg={""} />
-          </div>
-
-          <div className="flex flex-col space-y-2">
-            <label htmlFor={"title"} className="text-xl mb-1">
-              {/* {input.label} */} product description
-            </label>
-            <Input
-              name={"description"}
-              type={"text"}
-              id={"description"}
-              value={productToEdit["description"]}
-              onChange={onChangeEditHandler}
-            />
-            <ErrorMessage msg={""} />
-          </div>
+          {renderProductEditWithErrorMsg("title", "product Title", "title")}
+          {renderProductEditWithErrorMsg(
+            "description",
+            "Product Description",
+            "description"
+          )}
+          {renderProductEditWithErrorMsg(
+            "imgURL",
+            "Product img URL",
+            "imgURL"
+          )}
+          {renderProductEditWithErrorMsg(
+            "price",
+            "Product Price",
+            "price"
+          )}
           {/* <div className="flex flex-wrap  gap-1">
             {tempColors.map((color) => (
               <span

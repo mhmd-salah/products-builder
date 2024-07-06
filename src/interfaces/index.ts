@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes, HTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 import { Wid } from "../enums";
+import { ProductName } from "../types";
 
 export interface IpropsProductCard {
   product: IProduct;
@@ -34,7 +35,7 @@ export interface IPropsModle {
 
 export interface IformatInputs {
   id: string;
-  name: "title" | "description" | "price" | "imgURL";
+  name: ProductName;
   label: string;
   type: string;
 }
