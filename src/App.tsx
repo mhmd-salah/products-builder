@@ -69,6 +69,10 @@ function App() {
           setTempColors((prev) => prev.filter((item) => item !== color));
           return;
         }
+        if (productToEdit.colors.includes(color)) {
+          setTempColors((prev) => prev.filter((item) => item !== color));
+          return;
+        }
         setTempColors((prev) => [...prev, color]);
       }}
     />
@@ -169,7 +173,7 @@ function App() {
     }
 
     const updatedProducts = [...products]
-    updatedProducts[productToEditIdx] = productToEdit
+    updatedProducts[productToEditIdx] = { ...productToEdit ,colors:tempColors.concat(productToEdit.colors)};
     setProducts(updatedProducts)
 
     console.log("sending to server");
@@ -276,18 +280,11 @@ function App() {
             "Product Description",
             "description"
           )}
-          {renderProductEditWithErrorMsg(
-            "imgURL",
-            "Product img URL",
-            "imgURL"
-          )}
-          {renderProductEditWithErrorMsg(
-            "price",
-            "Product Price",
-            "price"
-          )}
-          {/* <div className="flex flex-wrap  gap-1">
-            {tempColors.map((color) => (
+          {renderProductEditWithErrorMsg("imgURL", "Product img URL", "imgURL")}
+          {renderProductEditWithErrorMsg("price", "Product Price", "price")}
+          <div className="flex gap-1">{renderProductColors}</div>
+          <div className="flex flex-wrap  gap-1">
+            {tempColors.concat( productToEdit.colors).map((color) => (
               <span
                 key={color}
                 className="rounded-md text-sm p-1 text-white"
@@ -296,7 +293,7 @@ function App() {
                 {color}
               </span>
             ))}
-          </div> */}
+          </div>
 
           {/* <div className="flex space-x-1">{renderProductColors}</div> */}
 
