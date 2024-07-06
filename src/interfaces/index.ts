@@ -1,9 +1,10 @@
 import { ButtonHTMLAttributes, HTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 import { Wid } from "../enums";
 
-export interface IpropsProductCard{
-  product:IProduct;
-  setProductToEdit:(product:IProduct)=>void
+export interface IpropsProductCard {
+  product: IProduct;
+  setProductToEdit: (product: IProduct) => void;
+  openEditM:()=>void;
 }
 
 export interface IpropsButton extends ButtonHTMLAttributes<HTMLButtonElement> {

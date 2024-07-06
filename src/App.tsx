@@ -27,8 +27,9 @@ function App() {
   };
   // States hook
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [product, setProduct] = useState<IProduct>(defaultProduct);
-  const [productToEdit,setProductToEdit] = useState<IProduct>(defaultProduct)
+  const [productToEdit, setProductToEdit] = useState<IProduct>(defaultProduct);
   const [tempColors, setTempColors] = useState<string[]>([]);
   const [products, setProducts] = useState<IProduct[]>(productList);
   const [selectedCatogry, setSelectedCategory] = useState(categorys[0]);
@@ -38,8 +39,21 @@ function App() {
     imgURL: "",
     price: "",
   });
+  //->> controler dailog for open and close
+  const open = () => setIsOpen(true);
+  const close = () => setIsOpen(false);
+  const openEditM = () => setIsOpenEdit(true);
+  const closeEditM = () => setIsOpenEdit(false);
+  // renders
   const renderProductList = products.map((product) => {
-    return <ProductCard key={product.id} product={product} setProductToEdit={setProductToEdit}/>;
+    return (
+      <ProductCard
+        key={product.id}
+        product={product}
+        setProductToEdit={setProductToEdit}
+        openEditM={openEditM}
+      />
+    );
   });
   const renderProductColors = colors.map((color) => (
     <CircleColor
@@ -87,7 +101,12 @@ function App() {
     }
     console.log("sending to server");
     setProducts((prev) => [
-      { ...product, id: Date.now(), colors: tempColors,category:selectedCatogry },
+      {
+        ...product,
+        id: Date.now(),
+        colors: tempColors,
+        category: selectedCatogry,
+      },
       ...prev,
     ]);
     setProduct(defaultProduct);
@@ -117,10 +136,6 @@ function App() {
     </div>
   ));
 
-  //->> controler dailog for open and close
-  const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
-
   //*--------------------------------->>> Return component
   return (
     <div className="container mt-10">
@@ -149,6 +164,47 @@ function App() {
 
       {/* this dailog from headless */}
       <Modle isOpen={isOpen} close={close} title="Add New Product">
+        <form className="space-y-3" onSubmit={submitHandler}>
+          {renderFormInputList}
+
+          <div className="flex flex-wrap  gap-1">
+            {tempColors.map((color) => (
+              <span
+                key={color}
+                className="rounded-md text-sm p-1 text-white"
+                style={{ background: color }}
+              >
+                {color}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex space-x-1">{renderProductColors}</div>
+
+          {/* select menu */}
+          <SelectMenu
+            selected={selectedCatogry}
+            setSelected={setSelectedCategory}
+          />
+
+          <div className="flex gap-2 mt-4 ">
+            <Button className="bg-sky-600" type="submit">
+              Submit
+            </Button>
+            <Button
+              className="bg-red-600"
+              onClick={() => {
+                onCancal();
+              }}
+            >
+              Cancle
+            </Button>
+          </div>
+        </form>
+      </Modle>
+
+      {/* edit modal  */}
+      <Modle isOpen={isOpenEdit} close={closeEditM} title="Edit Product">
         <form className="space-y-3" onSubmit={submitHandler}>
           {renderFormInputList}
 
