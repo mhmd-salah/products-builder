@@ -3,6 +3,7 @@ import { Wid } from "../enums";
 
 export interface IpropsProductCard{
   product:IProduct;
+  setProductToEdit:(product:IProduct)=>void
 }
 
 export interface IpropsButton extends ButtonHTMLAttributes<HTMLButtonElement> {

@@ -28,6 +28,7 @@ function App() {
   // States hook
   const [isOpen, setIsOpen] = useState(false);
   const [product, setProduct] = useState<IProduct>(defaultProduct);
+  const [productToEdit,setProductToEdit] = useState<IProduct>(defaultProduct)
   const [tempColors, setTempColors] = useState<string[]>([]);
   const [products, setProducts] = useState<IProduct[]>(productList);
   const [selectedCatogry, setSelectedCategory] = useState(categorys[0]);
@@ -37,11 +38,9 @@ function App() {
     imgURL: "",
     price: "",
   });
-
   const renderProductList = products.map((product) => {
-    return <ProductCard key={product.id} product={product} />;
+    return <ProductCard key={product.id} product={product} setProductToEdit={setProductToEdit}/>;
   });
-
   const renderProductColors = colors.map((color) => (
     <CircleColor
       color={color}

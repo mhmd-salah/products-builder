@@ -5,8 +5,8 @@ import CircleColor from "./CircleColor";
 import Image from "./Image";
 import Button from "./Ui/Button";
 
-export default function ProductCard({ product:{title,description ,price,category,colors} }: IpropsProductCard) {
-  
+export default function ProductCard({ product,setProductToEdit}: IpropsProductCard) {
+  const { title, description, price, category, colors } = product;
   // ------------------
     const renderProductColors = colors.map((color) => (
       <CircleColor
@@ -15,6 +15,10 @@ export default function ProductCard({ product:{title,description ,price,category
       />
     ));
   // ------------------
+  //-----> handler
+  function onEdit(){
+    setProductToEdit(product)
+  }
 
   return (
     <div className="border rounded-md  flex flex-col max-w-sm md:max-w-lg mx-auto bg-white shadow-lg pb-2">
@@ -37,7 +41,9 @@ export default function ProductCard({ product:{title,description ,price,category
           </div>
         </div>
         <div className="flex space-x-2 mt-3 items-end">
-          <Button className="bg-sky-500">Edit</Button>
+          <Button className="bg-sky-500"
+            onClick={()=>onEdit()}
+          >Edit</Button>
           <Button className="bg-red-600" width={Wid.full}>
             Delete
           </Button>
