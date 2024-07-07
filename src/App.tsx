@@ -51,7 +51,7 @@ function App() {
   const openEditM = () => setIsOpenEdit(true);
   const closeEditM = () => setIsOpenEdit(false);
   // renders
-  const renderProductList = products.map((product,idx) => {
+  const renderProductList = products.map((product, idx) => {
     return (
       <ProductCard
         key={product.id}
@@ -81,11 +81,15 @@ function App() {
       }}
     />
   ));
-  const renderProductEditWithErrorMsg = (id:string,label:string,name:ProductName) => {
+  const renderProductEditWithErrorMsg = (
+    id: string,
+    label: string,
+    name: ProductName
+  ) => {
     return (
       <div className="flex flex-col space-y-2">
         <label htmlFor={id} className="text-xl mb-1">
-          {label} 
+          {label}
         </label>
         <Input
           name={name}
@@ -178,16 +182,19 @@ function App() {
       return;
     }
 
-    const updatedProducts = [...products]
-    updatedProducts[productToEditIdx] = { ...productToEdit ,colors:tempColors.concat(productToEdit.colors)};
-    setProducts(updatedProducts)
+    const updatedProducts = [...products];
+    updatedProducts[productToEditIdx] = {
+      ...productToEdit,
+      colors: tempColors.concat(productToEdit.colors),
+    };
+    setProducts(updatedProducts);
 
     setProductToEdit(defaultProduct);
     setTempColors([]);
     toast("The product has been Updated", {
       style: { color: "teal" },
     });
-    closeEditM()
+    closeEditM();
     // throw new Error("function not implemented");
   };
 
@@ -198,18 +205,20 @@ function App() {
       style: { color: "red" },
     });
   };
-  
-  const removeProductHandler =()=>{
-    const filterd =products.filter((product)=>product.id !== productToEdit.id)
+
+  const removeProductHandler = () => {
+    const filterd = products.filter(
+      (product) => product.id !== productToEdit.id
+    );
     setProducts(filterd);
-    toast("The product has been deleted",{
-      style:{color:"red"}
+    toast("The product has been deleted", {
+      style: { color: "red" },
     });
-    setIsOpenConfirmM(false)
-  }
-  const onCancle =()=>{
     setIsOpenConfirmM(false);
-  }
+  };
+  const onCancle = () => {
+    setIsOpenConfirmM(false);
+  };
 
   const renderFormInputList = formInputs.map((input) => (
     <div className="flex flex-col space-y-2" key={input.id}>
@@ -357,11 +366,11 @@ function App() {
           Cancle
         </Button>
       </ConfirmModal>
-      <Toaster toastOptions={{
-        
-      }}/>
+      <Toaster toastOptions={{}} />
     </div>
   );
 }
 
 export default App;
+
+//the end 7-7-2024 09:38 AM morning
