@@ -13,6 +13,9 @@ import CircleColor from "./components/CircleColor";
 // import { Select } from "@headlessui/react";
 import SelectMenu from "./components/Ui/SeclectMenu";
 import { ProductName } from "./types";
+import ConfirmModal from "./components/Ui/ConfirmModal";
+
+import toast, { Toaster } from "react-hot-toast";
 
 function App() {
   const defaultProduct = {
@@ -29,6 +32,7 @@ function App() {
   // States hook
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
+  const [isOpenConfirmM, setIsOpenConfirmM] = useState(false);
   const [product, setProduct] = useState<IProduct>(defaultProduct);
   const [productToEdit, setProductToEdit] = useState<IProduct>(defaultProduct);
   const [productToEditIdx, setProductToEditIdx] = useState<number>(0);
@@ -41,7 +45,6 @@ function App() {
     imgURL: "",
     price: "",
   });
-  console.log(productToEditIdx)
   //->> controler dailog for open and close
   const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);
@@ -50,14 +53,15 @@ function App() {
   // renders
   const renderProductList = products.map((product,idx) => {
     return (
-        <ProductCard
-          key={product.id}
-          product={product}
-          setProductToEdit={setProductToEdit}
-          openEditM={openEditM}
-          setProductToEditIdx={setProductToEditIdx}
-          idx={idx}
-        />
+      <ProductCard
+        key={product.id}
+        product={product}
+        setProductToEdit={setProductToEdit}
+        openEditM={openEditM}
+        setProductToEditIdx={setProductToEditIdx}
+        idx={idx}
+        setIsOpenConfirmM={setIsOpenConfirmM}
+      />
     );
   });
   const renderProductColors = colors.map((color) => (
@@ -137,7 +141,6 @@ function App() {
       setErrors(errors);
       return;
     }
-    console.log("sending to server");
     setProducts((prev) => [
       {
         ...product,
@@ -149,6 +152,9 @@ function App() {
     ]);
     setProduct(defaultProduct);
     setTempColors([]);
+    toast("The product has been Added", {
+      style: { color: "orange" },
+    });
     close();
     // throw new Error("function not implemented");
   };
@@ -176,9 +182,11 @@ function App() {
     updatedProducts[productToEditIdx] = { ...productToEdit ,colors:tempColors.concat(productToEdit.colors)};
     setProducts(updatedProducts)
 
-    console.log("sending to server");
     setProductToEdit(defaultProduct);
     setTempColors([]);
+    toast("The product has been Updated", {
+      style: { color: "teal" },
+    });
     closeEditM()
     // throw new Error("function not implemented");
   };
@@ -186,7 +194,22 @@ function App() {
   const onCancal = () => {
     setProduct(defaultProduct);
     close();
+    toast("Cancled", {
+      style: { color: "red" },
+    });
   };
+  
+  const removeProductHandler =()=>{
+    const filterd =products.filter((product)=>product.id !== productToEdit.id)
+    setProducts(filterd);
+    toast("The product has been deleted",{
+      style:{color:"red"}
+    });
+    setIsOpenConfirmM(false)
+  }
+  const onCancle =()=>{
+    setIsOpenConfirmM(false);
+  }
 
   const renderFormInputList = formInputs.map((input) => (
     <div className="flex flex-col space-y-2" key={input.id}>
@@ -209,7 +232,7 @@ function App() {
     <div className="container mt-10">
       {/* this add product button */}
       <Button
-        className="bg-blue-600 p-2 text-xl"
+        className="bg-blue-600 p-2 text-xl text-white"
         width={Wid.fit}
         onClick={open}
       >
@@ -256,11 +279,11 @@ function App() {
           />
 
           <div className="flex gap-2 mt-4 ">
-            <Button className="bg-sky-600" type="submit">
+            <Button className="bg-sky-600 text-white " type="submit">
               Submit
             </Button>
             <Button
-              className="bg-red-600"
+              className="bg-red-600 text-white"
               onClick={() => {
                 onCancal();
               }}
@@ -285,7 +308,9 @@ function App() {
           select menu
           <SelectMenu
             selected={productToEdit.category}
-            setSelected={(value) => setProductToEdit({ ...productToEdit,category:value })}
+            setSelected={(value) =>
+              setProductToEdit({ ...productToEdit, category: value })
+            }
           />
           <div className="flex gap-1">{renderProductColors}</div>
           <div className="flex flex-wrap  gap-1">
@@ -300,11 +325,11 @@ function App() {
             ))}
           </div>
           <div className="flex gap-2 mt-4 ">
-            <Button className="bg-sky-600" type="submit">
+            <Button className="bg-sky-600 text-white" type="submit">
               Update
             </Button>
             <Button
-              className="bg-red-600"
+              className="bg-red-600 text-white"
               onClick={() => {
                 onCancal();
               }}
@@ -314,6 +339,27 @@ function App() {
           </div>
         </form>
       </Modle>
+      <ConfirmModal
+        isOpenConfirmM={isOpenConfirmM}
+        setIsOpenConfirmM={setIsOpenConfirmM}
+      >
+        <Button
+          className="inline-flex items-center gap-2 rounded-md bg-red-500 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-red-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-red-700"
+          onClick={removeProductHandler}
+        >
+          Yes, I'm sure to delete
+        </Button>
+
+        <Button
+          className="rounded-md bg-gray-100  py-1.5 px-3 text-sm/6 font-semibold focus:outline-none data-[hover]:bg-gray-200 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg--700 text-black"
+          onClick={onCancle}
+        >
+          Cancle
+        </Button>
+      </ConfirmModal>
+      <Toaster toastOptions={{
+        
+      }}/>
     </div>
   );
 }

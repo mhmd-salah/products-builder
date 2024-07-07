@@ -11,18 +11,26 @@ export default function ProductCard({
   openEditM,
   setProductToEditIdx,
   idx,
+  setIsOpenConfirmM,
 }: IpropsProductCard) {
   const { title, description, price, category, colors } = product;
   // ------------------
-  const renderProductColors = colors.map((color) => (
-    <CircleColor color={color} key={color} />
-  ));
+  const renderProductColors =
+    colors.length > 0 ? (
+      colors.map((color) => <CircleColor color={color} key={color} />)
+    ) : (
+      <span>notAvilableColors</span>
+    );
   // ------------------
   //-----> handler
   function onEdit() {
     setProductToEdit(product);
     openEditM();
     setProductToEditIdx(idx);
+  }
+  function onRemove() {
+    setProductToEdit(product);
+    setIsOpenConfirmM(true)
   }
 
   return (
@@ -46,10 +54,10 @@ export default function ProductCard({
           </div>
         </div>
         <div className="flex space-x-2 mt-3 items-end">
-          <Button className="bg-sky-500" onClick={() => onEdit()}>
+          <Button className="bg-sky-500 text-white" onClick={() => onEdit()}>
             Edit
           </Button>
-          <Button className="bg-red-600" width={Wid.full}>
+          <Button className="bg-red-600 text-white" width={Wid.full} onClick={onRemove}>
             Delete
           </Button>
         </div>

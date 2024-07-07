@@ -9,7 +9,7 @@ export const productList: IProduct[] = [
     price: "200",
     category: {
       name: "cars",
-      imgURL: "https://placehold.c0/200",
+      imgURL: "https://placehold.co/400",
     },
     imgURL: "https://placehold.co/400",
     colors: ["red", "green", "blue"],
@@ -22,7 +22,7 @@ export const productList: IProduct[] = [
     price: "200",
     category: {
       name: "cars",
-      imgURL: "https://placehold.c0/200",
+      imgURL: "https://placehold.co/200",
     },
     imgURL: "https://placehold.co/400",
     colors: ["red", "green", "blue"],
@@ -35,7 +35,7 @@ export const productList: IProduct[] = [
     price: "200",
     category: {
       name: "cars",
-      imgURL: "https://placehold.c0/200",
+      imgURL: "https://placehold.co/200",
     },
     imgURL: "https://placehold.co/400",
     colors: ["red", "green", "blue"],

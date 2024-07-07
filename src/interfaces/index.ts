@@ -6,8 +6,9 @@ export interface IpropsProductCard {
   product: IProduct;
   setProductToEdit: (product: IProduct) => void;
   openEditM: () => void;
-  idx:number
-  setProductToEditIdx:(value:number)=>void
+  idx: number;
+  setProductToEditIdx: (value: number) => void;
+  setIsOpenConfirmM: (val:boolean)=>void;
 }
 
 export interface IpropsButton extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -54,4 +55,9 @@ export interface Icategory{
   id:number
   name:string
   imgURL:string
+}
+export interface IconfirmModal {
+  isOpenConfirmM: boolean;
+  setIsOpenConfirmM: (val: boolean) => void;
+  children:ReactNode
 }

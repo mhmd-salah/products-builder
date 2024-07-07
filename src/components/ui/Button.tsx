@@ -11,7 +11,7 @@ export default function Button({
 }: IpropsButton) {
   return (
     <button
-      className={`${className} ${width} rounded-md text-white p-1 text-lg`}
+      className={`${className} ${width} rounded-md p-1 text-lg`}
       {...rest}
     >
       {children}
