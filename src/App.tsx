@@ -95,7 +95,7 @@ function App() {
     );
   };
 
-  // handlers
+  //*--------------> Handlers
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setProduct({
@@ -282,9 +282,14 @@ function App() {
           )}
           {renderProductEditWithErrorMsg("imgURL", "Product img URL", "imgURL")}
           {renderProductEditWithErrorMsg("price", "Product Price", "price")}
+          select menu
+          <SelectMenu
+            selected={productToEdit.category}
+            setSelected={(value) => setProductToEdit({ ...productToEdit,category:value })}
+          />
           <div className="flex gap-1">{renderProductColors}</div>
           <div className="flex flex-wrap  gap-1">
-            {tempColors.concat( productToEdit.colors).map((color) => (
+            {tempColors.concat(productToEdit.colors).map((color) => (
               <span
                 key={color}
                 className="rounded-md text-sm p-1 text-white"
@@ -294,15 +299,6 @@ function App() {
               </span>
             ))}
           </div>
-
-          {/* <div className="flex space-x-1">{renderProductColors}</div> */}
-
-          {/* select menu */}
-          {/* <SelectMenu
-            selected={selectedCatogry}
-            setSelected={setSelectedCategory}
-          /> */}
-
           <div className="flex gap-2 mt-4 ">
             <Button className="bg-sky-600" type="submit">
               Update

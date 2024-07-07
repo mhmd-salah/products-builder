@@ -41,6 +41,6 @@ export const productValidation = (product: {
 };
 
 export interface IpropsSelecte{
-  selected:Icategory
+  selected:{name:string,imgURL:string}
   setSelected:(categorey:Icategory)=>void
 }
