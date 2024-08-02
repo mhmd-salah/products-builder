@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import "./App.css";
 import ProductCard from "./components/ProductCard";
 import Modle from "./components/Ui/Modle";
@@ -46,10 +46,10 @@ function App() {
     price: "",
   });
   //->> controler dailog for open and close
-  const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
-  const openEditM = () => setIsOpenEdit(true);
-  const closeEditM = () => setIsOpenEdit(false);
+  const open = useCallback(() => setIsOpen(true), []);
+  const close = useCallback(() => setIsOpen(false),[]);
+  const openEditM = useCallback(() => setIsOpenEdit(true),[]);
+  const closeEditM = useCallback(() => setIsOpenEdit(false),[]);
   // renders
   const renderProductList = products.map((product, idx) => {
     return (
@@ -63,7 +63,7 @@ function App() {
         setIsOpenConfirmM={setIsOpenConfirmM}
       />
     );
-  });
+  })
   const renderProductColors = colors.map((color) => (
     <CircleColor
       color={color}
@@ -104,7 +104,7 @@ function App() {
   };
 
   //*--------------> Handlers
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setProduct({
       ...product,
@@ -114,7 +114,7 @@ function App() {
       ...errors,
       [name]: "",
     });
-  };
+  },[errors,product])
 
   const onChangeEditHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

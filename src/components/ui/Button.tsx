@@ -1,9 +1,11 @@
+/* eslint-disable react-refresh/only-export-components */
+import { memo } from "react";
 import { Wid } from "../../enums";
 import { IpropsButton } from "../../interfaces";
 
 
 
-export default function Button({
+function Button({
   children,
   className,
   width=Wid.full,
@@ -18,3 +20,5 @@ export default function Button({
     </button>
   );
 }
+
+export default memo(Button)

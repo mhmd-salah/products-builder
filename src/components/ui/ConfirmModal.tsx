@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import {
   Dialog,
   DialogBackdrop,
@@ -5,8 +6,9 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { IconfirmModal } from "../../interfaces";
+import { memo } from "react";
 
-export default function ConfirmModal({
+function ConfirmModal({
   isOpenConfirmM,
   setIsOpenConfirmM,
   children,
@@ -52,4 +54,4 @@ export default function ConfirmModal({
     </>
   );
 }
-
+export default memo(ConfirmModal);

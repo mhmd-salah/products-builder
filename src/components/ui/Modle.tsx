@@ -1,10 +1,12 @@
+/* eslint-disable react-refresh/only-export-components */
 import {  Dialog, DialogBackdrop, DialogPanel, DialogTitle } from "@headlessui/react";
 import { IPropsModle } from "../../interfaces";
+import { memo } from "react";
 // import { useState } from "react";
 
 
 
-export default function Modle({isOpen,close,title,children}:IPropsModle) {
+function Modle({isOpen,close,title,children}:IPropsModle) {
 
 
   return (
@@ -36,3 +38,4 @@ export default function Modle({isOpen,close,title,children}:IPropsModle) {
     </>
   );
 }
+export default memo(Modle)

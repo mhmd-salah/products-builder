@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 "use client";
 
 import {
@@ -10,8 +11,9 @@ import {
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import { IpropsSelecte } from "../../validation";
 import { categorys } from "../../data";
+import { memo } from "react";
 
-export default function SeclectMenu({ selected, setSelected }: IpropsSelecte) {
+function SeclectMenu({ selected, setSelected }: IpropsSelecte) {
   return (
     <Listbox value={selected} onChange={setSelected}>
       <Label className="block text-sm font-medium leading-6 text-gray-900">
@@ -68,3 +70,5 @@ export default function SeclectMenu({ selected, setSelected }: IpropsSelecte) {
     </Listbox>
   );
 }
+
+export default memo(SeclectMenu)

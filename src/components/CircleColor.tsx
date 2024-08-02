@@ -1,6 +1,8 @@
+/* eslint-disable react-refresh/only-export-components */
+import { memo } from "react";
 import { IpropsCircleColor } from "../interfaces";
 
-export default function CircleColor({ color ,...rest}: IpropsCircleColor) {
+function CircleColor({ color ,...rest}: IpropsCircleColor) {
   return (
     <span
       className="block h-5 w-5 rounded-full cursor-pointer"
@@ -9,3 +11,4 @@ export default function CircleColor({ color ,...rest}: IpropsCircleColor) {
     ></span>
   );
 }
+export default memo(CircleColor)

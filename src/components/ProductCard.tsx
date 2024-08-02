@@ -1,3 +1,5 @@
+/* eslint-disable react-refresh/only-export-components */
+import { memo } from "react";
 import { Wid } from "../enums";
 import { IpropsProductCard } from "../interfaces";
 import { textSlicer } from "../utils/functions";
@@ -5,7 +7,7 @@ import CircleColor from "./CircleColor";
 import Image from "./Image";
 import Button from "./Ui/Button";
 
-export default function ProductCard({
+function ProductCard({
   product,
   setProductToEdit,
   openEditM,
@@ -65,3 +67,4 @@ export default function ProductCard({
     </div>
   );
 }
+export default memo(ProductCard);
