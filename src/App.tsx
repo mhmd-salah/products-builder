@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useCallback, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useRef, useState } from "react";
 import "./App.css";
 import ProductCard from "./components/ProductCard";
 import Modle from "./components/Ui/Modle";
@@ -30,6 +30,8 @@ function App() {
     },
   };
   // States hook
+  const inputRef = useRef<null|HTMLInputElement>(null)
+  console.log(inputRef.current.value)
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [isOpenConfirmM, setIsOpenConfirmM] = useState(false);
@@ -106,15 +108,9 @@ function App() {
   //*--------------> Handlers
   const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setProduct({
-      ...product,
-      [name]: value,
-    });
-    setErrors({
-      ...errors,
-      [name]: "",
-    });
-  },[errors,product])
+    setProduct(prev=>({...prev,[name]:value}));
+    setErrors(prev=>({...prev,[name]:""}));
+  },[])
 
   const onChangeEditHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -226,6 +222,7 @@ function App() {
         {input.label}
       </label>
       <Input
+        ref={inputRef}
         name={input.name}
         type={input.type}
         id={input.id}
@@ -302,7 +299,6 @@ function App() {
           </div>
         </form>
       </Modle>
-
       {/* edit modal  */}
       <Modle isOpen={isOpenEdit} close={closeEditM} title="Edit Product">
         <form className="space-y-3" onSubmit={submitEditHandler}>
