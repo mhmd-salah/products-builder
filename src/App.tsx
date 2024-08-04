@@ -31,7 +31,6 @@ function App() {
   };
   // States hook
   const inputRef = useRef<null|HTMLInputElement>(null)
-  console.log(inputRef.current.value)
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [isOpenConfirmM, setIsOpenConfirmM] = useState(false);
